@@ -46,14 +46,17 @@ exports.get_by_title = (req, res, next) => {
         else if (stack.length === 1) {
             return res.status(200).json({
                 message: "We found one book with this title",
-                bookDetails: {
+                books: [
+                    {
                     title: stack[0].title,
                     isbn: stack[0].isbn,
                     author: stack[0].author,
                     bookId: stack[0]._id
-                },
-                checkMeOut :`http://localhost:3000/books/checkOut/${stack[0]._id}`,
-                checkOutFormat: `[{propName: available , value: true}]`
+                    }
+                ]
+                // ,
+                // checkMeOut :`http://localhost:3000/books/checkOut/${stack[0]._id}`,
+                // checkOutFormat: `[{propName: available , value: true}]`
             })
         }
         else {
@@ -64,15 +67,17 @@ exports.get_by_title = (req, res, next) => {
                     title: book.title,
                     isbn: book.isbn,
                     author: book.author,
-                    bookId: book._id,
-                    checkMeOut: `http://localhost:3000/books/checkOut/${book._id}`
+                    bookId: book._id
+                    // ,
+                    // checkMeOut: `http://localhost:3000/books/checkOut/${book._id}`
                 }
                 books.push(current);
             }
             res.status(200).json({
                 message: "We found many books with this title",
-                booksFound: books,
-                checkOutFormat: '[{propName: available , value: true}]'
+                books: books
+                // ,
+                // checkOutFormat: '[{propName: available , value: true}]'
             })
         }
     })

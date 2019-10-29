@@ -23,7 +23,7 @@ exports.scan_card = (req, res, next) => {
                 }
                 if (result) {
                     return res.status(200).json({
-                        message: "Library card successfully scanned, proceed with checkout"
+                        message: "Library card successfully scanned"
                     });
                 }
                 res.status(401).json({
